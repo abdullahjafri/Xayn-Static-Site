@@ -1,0 +1,4 @@
+stageName: PROD
+secretValue: SuperSecretProd
+hostname: prod.xayn.local
+tlsSecretName: prod-tls-cert

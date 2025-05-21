@@ -1,0 +1,8 @@
+image:
+  repository: xayn/static-site
+  tag: latest
+
+stageName: dev
+secretValue: defaultSecret
+hostname: dev.xayn.local
+tlsSecretName: dev-tls-cert

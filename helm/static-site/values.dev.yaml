@@ -1,0 +1,4 @@
+stageName: DEV
+secretValue: SuperSecretDev
+hostname: dev.xayn.local
+tlsSecretName: dev-tls-cert
