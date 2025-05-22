@@ -198,6 +198,6 @@ minikube delete
 
 ## Optional: Terraform for Cloud Providers
 
-See the `terraform/eks` and `terraform/gke` directories for IaC templates to provision AWS EKS including VPC, EKS/GKE, and Traefik installation.
+See the `terraform/eks` directory for IaC templates to provision AWS EKS including VPC, EKS, and Traefik installation.
 
 ---
