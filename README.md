@@ -1,28 +1,25 @@
 # Xayn Static Site Deployment – DevOps Task
 
-Follow the steps in the README above or see `scripts/bootstrap-minikube.sh` for setup.
-
 # Xayn Static Site Deployment
 
 **Author:** Syed Muhammad Abdullah Jafri  
-**Role:** Senior DevOps Engineer (m/f/d) | Legal AI Tech Start-up | Full Remote  
 
 ---
 
 ## Overview
 
-This repository contains all the resources needed to deploy a simple static website on Kubernetes using Traefik as an Ingress controller. The deployment supports two isolated environments—**dev** and **prod**—each served over HTTPS (self-signed for local testing) and injecting runtime configuration via environment variables.
+This repo has everything you need to run a static website on Kubernetes. I'm using Traefik to handle incoming traffic and set up separate dev and prod environments that run on HTTPS (with self-signed certs for local development). The site can pick up different settings depending on which environment it's running in.
+What's included:
 
-Key features:
-- Kubernetes manifests managed with **Helm**  
-- **Traefik** Ingress for routing and TLS termination  
-- **Nginx** container serving a static HTML site with dynamic env var injection  
-- Two environments: **dev** and **prod**  
-- Environment-specific secrets and hostnames  
-- HTTPS enabled with self-signed certificates  
-- Health checks via liveness and readiness probes  
-- Bootstrap script for local setup with **Minikube**  
-- Optional Terraform templates for provisioning on **EKS** / **GKE**
+- Helm charts to manage all the Kubernetes stuff
+- Traefik for handling web traffic and SSL certificates
+- Custom Nginx setup that can read environment variables at startup
+- Separate dev and prod environments with their own domains
+- Different secrets and hostnames for each environment
+- HTTPS working out of the box
+- Health checks so Kubernetes knows if something's broken
+- Script to get everything running locally with Minikube
+- Terraform files if you want to deploy this on AWS or Google Cloud
 
 ---
 
@@ -58,12 +55,12 @@ Key features:
 
 ```
 xayn-static-site-k8s/
-├── static-site/                # Nginx Docker image with env var injection
+├── static-site/                # Nginx Docker image with env var sending
 │   ├── Dockerfile
 │   ├── entrypoint.sh
 │   └── index.html.template
 ├── helm/
-│   └── static-site/            # Helm chart for static site (dev/prod)
+│   └── static-site/            # Helm chart for static site for both (dev/prod)
 │       ├── Chart.yaml
 │       ├── values.yaml
 │       ├── values.dev.yaml
@@ -75,10 +72,9 @@ xayn-static-site-k8s/
 │           ├── configmap.yaml
 │           └── secret.yaml
 ├── scripts/
-│   └── bootstrap-minikube.sh   # One-step script to set up Minikube, Traefik, and apps
+│   └── bootstrap-minikube.sh   # One-step script to set up Minikube Traefik and apps
 ├── terraform/
 │   ├── eks/                    # Terraform templates for AWS EKS
-│   └── gke/                    # Terraform templates for GKE
 └── README.md                   # This file
 ```
 
@@ -202,10 +198,6 @@ minikube delete
 
 ## Optional: Terraform for Cloud Providers
 
-See the `terraform/eks` and `terraform/gke` directories for IaC templates to provision AWS EKS and Google GKE clusters, including VPC, EKS/GKE, and Traefik installation.
+See the `terraform/eks` and `terraform/gke` directories for IaC templates to provision AWS EKS including VPC, EKS/GKE, and Traefik installation.
 
 ---
-
-## License
-
-This project is provided under the MIT License. Feel free to use and adapt it to your needs.
